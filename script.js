@@ -14,8 +14,20 @@ function createGrid(num) {
     for (let i = 0; i < Math.pow(num, 2); i++) {
         const gridDiv = document.createElement('div');
         gridDiv.setAttribute('style', 'background-color: black; border: none');
+        gridDiv.addEventListener('mousedown', changeColor);
+        gridDiv.addEventListener('mouseover', changeColor);
         container.appendChild(gridDiv);
     }
+}
+
+//When user "hovers" over a particular grid div, change its background color
+let mouseDown = false;
+container.addEventListener('mousedown', () => mouseDown = true);
+container.addEventListener('mouseup', () => mouseDown = false);
+
+function changeColor(e) {
+    if (e.type === 'mouseover' && !mouseDown) return;
+    e.target.setAttribute('style', 'background-color: white;');
 }
 
 //output the num of sqr divs
@@ -39,4 +51,12 @@ function defaultGrid() {
     createGrid(16);
     showSize(16);
 }
-//When user "hovers" over a particular grid div, change its background color
+
+//Add clear functionality
+const clear = document.querySelector('#clear');
+clear.addEventListener('click', clearContainer);
+
+function clearContainer() {
+    const children = container.childNodes;
+    children.forEach(child => child.setAttribute('style', 'background-color: black;'));
+}
