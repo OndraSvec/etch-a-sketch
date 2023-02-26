@@ -40,11 +40,9 @@ function changeColor(e) {
 }
 
 //When default mode is active, set other modes to false
-let defaultMode = false;
 
 const defaultWhite = document.querySelector('#default');
 defaultWhite.addEventListener('click', () => {
-    defaultMode = !eraserActive;
     rainbowMode = false;
     eraserActive = false;
 });
