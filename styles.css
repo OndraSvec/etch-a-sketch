@@ -29,6 +29,7 @@ body {
 .container {
     width: clamp(12rem, 50vw, 40rem);
     aspect-ratio: 1 / 1;
+    border: 0.2rem solid black;
 }
 
 #sketch {
