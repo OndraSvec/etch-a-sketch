@@ -24,12 +24,33 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 1em;
+    padding: 2em;
+    box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 }
 
 .container {
     width: clamp(12rem, 50vw, 40rem);
     aspect-ratio: 1 / 1;
     border: 0.2rem solid black;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.controls p,
+.controls input {
+    align-self: center;
+}
+
+.controls button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    font-size: clamp(0.25rem, 0.25rem + 2vmin, 1.5rem);
 }
 
 #sketch {
