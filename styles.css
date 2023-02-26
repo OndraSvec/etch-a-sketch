@@ -19,6 +19,13 @@ body {
     align-items: center;
 }
 
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1em;
+}
+
 .container {
     width: clamp(12rem, 50vw, 40rem);
     aspect-ratio: 1 / 1;
@@ -26,6 +33,8 @@ body {
 
 #sketch {
     text-transform: uppercase;
+    text-align: center;
+    font-size: clamp(1rem, 1rem + 2vmin, 6rem);
 }
 
 input[type=range] {
@@ -57,4 +66,13 @@ input[type=range]::-webkit-slider-thumb {
     height: clamp(0.5rem, 0.5rem + 2vmin, 1.25rem);
     background: black;
     cursor: pointer;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .wrapper {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        align-items: center;
+    }
   }
