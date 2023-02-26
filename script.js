@@ -27,11 +27,11 @@ container.addEventListener('mouseup', () => mouseDown = false);
 
 function changeColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
-    else if (e.type === 'mouseover' && eraserActive && mouseDown && !rainbowMode) {
+    else if (e.type === 'mouseover' && eraserActive && mouseDown && !rainbowMode && !defaultMode) {
         e.target.setAttribute('style', 'background-color: black;');
-    } else if (e.type === 'mouseover' && mouseDown && !rainbowMode && !eraserActive) {
+    } else if (e.type === 'mouseover' && mouseDown && defaultMode && !rainbowMode && !eraserActive) {
         e.target.setAttribute('style', 'background-color: white;');
-    } else if (e.type === 'mouseover' && mouseDown && rainbowMode && !eraserActive) {
+    } else if (e.type === 'mouseover' && mouseDown && rainbowMode && !eraserActive && !defaultMode) {
         let randomR = Math.floor(Math.random() * 256);
         let randomG = Math.floor(Math.random() * 256);
         let randomB = Math.floor(Math.random() * 256);
@@ -39,31 +39,56 @@ function changeColor(e) {
     }
 }
 
+function activateButton(e) {
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => button.classList.remove('active'));
+    if (e.target.id === 'eraser') {
+        eraserActive = !eraserActive;
+        defaultMode = false;
+        rainbowMode = false;
+        if (eraserActive === true) {
+            eraser.classList.add('active');
+        }
+    } else if (e.target.id === 'rainbow') {
+        rainbowMode = !rainbowMode;
+        eraserActive = false;
+        defaultMode = false;
+        if (rainbowMode === true) {
+            rainbow.classList.add('active');
+        }
+    } else if (e.target.id === 'clear') {
+        rainbowMode = false;
+        eraserActive = false;
+        defaultMode = true;
+        defaultWhite.classList.add('active');
+        clearContainer();
+    } else if (e.target.id === 'default') {
+        defaultMode = !defaultMode;
+        rainbowMode = false;
+        eraserActive = false;
+        if (defaultMode === true) {
+            defaultWhite.classList.add('active');
+        }
+    }
+}
+
 //When default mode is active, set other modes to false
+let defaultMode = true;
 
 const defaultWhite = document.querySelector('#default');
-defaultWhite.addEventListener('click', () => {
-    rainbowMode = false;
-    eraserActive = false;
-});
+defaultWhite.addEventListener('click', activateButton);
 
 //When eraser button is active, set background color of each "hovered" grid div back to black
 let eraserActive = false;
 
 const eraser = document.querySelector('#eraser');
-eraser.addEventListener('click', () => {
-    eraserActive = !eraserActive;
-    rainbowMode = false;
-});
+eraser.addEventListener('click', activateButton);
 
 //When rainbow mode is activated, set background color of each "hovered" grid div to a random color based on the mouse's position
 let rainbowMode = false;
 
 const rainbow = document.querySelector('#rainbow');
-rainbow.addEventListener('click', () => {
-    rainbowMode = !rainbowMode;
-    eraserActive = false;
-});
+rainbow.addEventListener('click', activateButton);
 
 //output the num of sqr divs
 function showSize(num) {
@@ -89,7 +114,7 @@ function defaultGrid() {
 
 //Add clear functionality
 const clear = document.querySelector('#clear');
-clear.addEventListener('click', clearContainer);
+clear.addEventListener('click', activateButton);
 
 function clearContainer() {
     const children = container.childNodes;

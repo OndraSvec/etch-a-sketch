@@ -56,6 +56,14 @@ body {
 
 .controls button:hover {
     cursor: pointer;
+    scale: 0.95;
+}
+
+.controls button.active {
+    background-color: white;
+    color: black;
+    border: 1px solid black;
+    scale: 0.95;
 }
 
 #sketch {
