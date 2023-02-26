@@ -27,17 +27,27 @@ container.addEventListener('mouseup', () => mouseDown = false);
 
 function changeColor(e) {
     if (e.type === 'mouseover' && !mouseDown) return;
-    else if (e.type === 'mouseover' && eraserActive && mouseDown) {
+    else if (e.type === 'mouseover' && eraserActive && mouseDown && !rainbowMode) {
         e.target.setAttribute('style', 'background-color: black;');
-    } else if (e.type === 'mouseover' && mouseDown && !rainbowMode) {
+    } else if (e.type === 'mouseover' && mouseDown && !rainbowMode && !eraserActive) {
         e.target.setAttribute('style', 'background-color: white;');
-    } else if (e.type === 'mouseover' && mouseDown && rainbowMode) {
+    } else if (e.type === 'mouseover' && mouseDown && rainbowMode && !eraserActive) {
         let randomR = Math.floor(Math.random() * 256);
         let randomG = Math.floor(Math.random() * 256);
         let randomB = Math.floor(Math.random() * 256);
         e.target.setAttribute('style', `background-color: rgb(${randomR}, ${randomG}, ${randomB});`);
     }
 }
+
+//When default mode is active, set other modes to false
+let defaultMode = false;
+
+const defaultWhite = document.querySelector('#default');
+defaultWhite.addEventListener('click', () => {
+    defaultMode = !eraserActive;
+    rainbowMode = false;
+    eraserActive = false;
+});
 
 //When eraser button is active, set background color of each "hovered" grid div back to black
 let eraserActive = false;
