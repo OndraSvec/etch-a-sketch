@@ -51,6 +51,7 @@ body {
     border: none;
     padding: 0.5em 1em;
     font-size: clamp(0.25rem, 0.25rem + 2vmin, 1.5rem);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.692), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 }
 
 .controls button:hover {
