@@ -19,6 +19,11 @@ body {
     align-items: center;
 }
 
+.container {
+    width: 40vw;
+    aspect-ratio: 1 / 1;
+}
+
 #sketch {
     text-transform: uppercase;
 }
