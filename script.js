@@ -55,10 +55,29 @@ function changeColor(e) {
     } else if (e.type === 'mouseover' && mouseDown && defaultMode && !rainbowMode && !eraserActive) {
         e.target.setAttribute('style', 'background-color: white;');
     } else if (e.type === 'mouseover' && mouseDown && rainbowMode && !eraserActive && !defaultMode) {
-        let randomR = Math.floor(Math.random() * 256);
-        let randomG = Math.floor(Math.random() * 256);
-        let randomB = Math.floor(Math.random() * 256);
-        e.target.setAttribute('style', `background-color: rgb(${randomR}, ${randomG}, ${randomB});`);
+        e.target.setAttribute('style', `background-color: rgb(${mousePosX}, ${mousePosY}, ${(mousePosX + mousePosY) / 1.65});`);
+    }
+}
+
+//Initialize and update mouse position relative to viewport-size to use to change color in rainbow mode
+let mousePosX = 0;
+let mousePosY = 0;
+
+let viewportWidth = document.documentElement.clientWidth;
+let viewportHeight = document.documentElement.clientHeight;
+
+window.addEventListener('mousemove', mousePosition);
+
+function mousePosition(e) {
+    if (viewportWidth < viewportHeight && viewportWidth < 600) {
+        mousePosX = ((e.screenX / viewportWidth) * 255) * 0.9;
+        mousePosY = ((e.screenY / viewportHeight) * 255) * 1.3;
+    } else if (viewportWidth < 900) {
+        mousePosX = ((e.screenX / viewportWidth) * 255) * 0.95;
+        mousePosY = ((e.screenY / viewportHeight) * 255) * 1.1;
+    } else {
+        mousePosX = (e.screenX / viewportWidth) * 255;
+        mousePosY = (e.screenY / viewportHeight) * 255;
     }
 }
 
